@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Oct 19 19:09:55 2022
-
+可将程序复制到spyder中运行，右侧tabs中会直接显示作业
 @author: 王宇彤
 """
 
