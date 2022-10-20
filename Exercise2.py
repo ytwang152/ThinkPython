@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Oct 20 18:27:08 2022
-
-@author: DELL
+可将程序复制到spyder中运行，右侧tabs会直接显示作业
+@author: 王宇彤
 """
 
 #Exercise2.1
