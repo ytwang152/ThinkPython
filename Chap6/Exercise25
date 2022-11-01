@@ -1,0 +1,65 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Nov  1 00:55:01 2022
+
+@author: DELL
+
+"""
+
+#%%6.2
+def ack(m,n):
+    if m == 0:
+        return n+1
+    elif m>0 and n==0:
+        return ack(m-1,1)
+    return ack(m-1,ack(m,n-1))
+    
+print(ack(3,4))
+print(ack(3,30))
+
+#如果m和n的值较大，其递归次数会迅速增加，直到达到最大递归深度
+#%%6.3
+def first(word):
+    return word[0]
+def last(word):
+    return word[-1]
+def middle(word):
+    return word[1:-1]
+
+print(middle("w"))
+print(middle(""))
+#1. 当为一个两个字母或空字符串时，不会返回任何内容
+
+def is_palindrome(word):
+    if len(word)>1:
+        if first(word)==last(word):
+            return(is_palindrome(middle(word)))
+        else:
+            return False
+    return True
+print(is_palindrome("sjj79"))
+        
+#%%6.4
+def is_power(a,b):
+    if a==0 or b==0 or a!= abs(int(a)) or b!= abs(int(b)) :
+       return print("a、b应为正整数")
+    elif a%b == 0 :
+        if a!=b:
+           return is_power(a/b,b)
+        else:
+             return True     
+    else:
+        return False
+    
+print(is_power(-124, 6))
+
+
+#%%6.5
+
+
+def gcd(a,b):
+    if b == 0:
+        return abs(a)
+    return gcd(b,a%b)
+    
+print(gcd(8,8))
