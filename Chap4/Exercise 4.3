@@ -1,0 +1,81 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Oct 31 17:30:24 2022
+
+@author: 王宇彤
+
+"""
+
+
+
+
+import turtle
+import math
+#%%Exercise 1
+
+
+def square(t):
+    t=turtle.Turtle()
+    for i in range(4):
+        t.fd(100)
+        t.lt(90)
+  
+square("bob")
+
+#%%Exercise 2
+def square_2(t,length):
+    t=turtle.Turtle()
+    for i in range(4):
+        t.fd(length)
+        t.lt(90)
+
+square_2("bob", 200)
+
+#%%Exercise 3
+def polygon(t,length,n):
+    """
+    length 边长
+    n      边数
+    """
+    t=turtle.Turtle()
+    for i in range(n):
+        t.fd(length)
+        t.lt(360/n)
+
+polygon("bob",100,6)
+
+#%%Exercise 4
+
+        
+def circle(t,r):
+    n = 50
+    length = 2*math.pi*r/n
+    polygon(t,length,n)
+   
+
+circle("bob",30)
+circle("bob",40)
+
+
+
+#%%Exercise 5
+    
+
+import turtle 
+import math
+
+        
+def arc(t,r,angle):
+      t=turtle.Turtle()
+      n =50
+      c = 2*math.pi*r   
+      length = 2*c/n
+      n1 = int(n*(angle/360))
+      for i in range(n1):
+          t.fd(length)
+          t.lt(360/n)
+     
+      
+arc("b",40,180)     
+    
+
