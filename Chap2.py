@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-您可将程序复制到spyder中，右侧tabs中会显示出作业答案
 
 Created on Thu Oct 20 18:27:08 2022
 @author: 王宇彤
