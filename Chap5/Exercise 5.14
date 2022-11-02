@@ -1,0 +1,120 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Oct 31 22:23:53 2022
+
+@author: 王宇彤
+"""
+
+#%%5.1
+import time
+s = time.time()
+day = s//(60*60*24)
+hour =(s%(60*60*24))//(60**2)
+minute=(s%60*60)//60
+second = s%60
+print("Time passed","%0d:%0d:%0d:%0d:" % (day,hour,minute,second))
+
+#%%5.2
+def check_fermat(a,b,c,n):
+    if a**n+b**n==c**n and n>2:
+        print("Holy smokes,Fermat was wrong!")
+    else:
+        print("No,that doesn't work.")
+prompt_a = "请输入 a.\n"
+prompt_b = "请输入 b.\n"
+prompt_c = "请输入 c.\n"
+prompt_n = "请输入 n(它应该大于2).\n"
+a = int(input(prompt_a))
+b = int(input(prompt_b))
+c = int(input(prompt_c))
+n = int(input(prompt_n))
+
+check_fermat(a,b,c,n)
+
+#%%5.3
+def is_triangle(a,b,c):
+    if a+b >c and a+c>b and b+c>a:
+        print("yes")
+    else:
+        print("no")
+
+prompt_a = "请输入边长a.\n"
+prompt_b = "请输入边长b.\n"
+prompt_c = "请输入边长c.\n"
+a = int(input(prompt_a))
+b = int(input(prompt_b))
+c = int(input(prompt_c))
+
+
+is_triangle(a,b,c)
+
+#%%5.4
+"""调用函数须知：
+    该函数的实参n不能小于0，否则会进入无限递归
+"""
+def recurse(n,s):
+    if n == 0:
+        print(s)
+    else:
+        recurse(n-1,n+s)
+recurse(3,0)
+#1  该递归永远不会达到基础情形，所以会一直调用，并在达到最大递归深度后报错
+#%%5.5
+import turtle
+bob = turtle.Turtle()
+
+def draw(t,length,n):   
+    if n == 0:
+        return
+    angle = 50
+    t.fd(length*n)
+    t.lt(angle)
+    draw(t,length,n-1)
+    t.rt(2*angle)
+    draw(t,length,n-1)
+    t.lt(angle)
+    t.bk(length*n)
+
+draw(bob,50,3)
+    
+#%%5.6
+#1 koch 函数
+import turtle
+t=turtle.Turtle()
+
+def koch(t,x):
+    if x>=3:
+        t.fd(x/3)
+        t.lt(60)
+        t.fd(x/3)
+        t.rt(120)
+        t.fd(x/3)
+        t.lt(60)
+        t.fd(x/3)
+    else:
+        t.fd(x)
+koch(t,300)
+
+#2  snowflake 
+def snowflake(t,x): 
+    koch(t,x)
+    t.rt(120)
+    koch(t,x)
+    t.rt(120)
+    koch(t,x)
+    t.rt(120)
+
+snowflake(t,100)
+
+#3 Cesaro
+def Cesaro(t,x,n):
+    """
+    n = 边数
+    x = 边长
+    """
+    for i in range(n):
+        koch(t,x)
+        t.lt(360/n)
+        
+Cesaro(t,100,6)  
+   
