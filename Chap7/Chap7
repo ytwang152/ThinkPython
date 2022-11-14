@@ -1,0 +1,105 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Nov  3 20:49:46 2022
+
+@author: 王宇彤
+
+"""
+
+#%%7.1
+import math
+def mysqrt(a):
+    x=a/2
+    while True:
+        y=(x+a/x)/2
+        if abs(y-x)<0.0000000000001:
+            break
+        x=y
+    return x
+        
+mysqrt(225) 
+
+def test_square_root(a):
+    nat ="{:<2}\t{:<10}\t{:<10}\t{:<10}"
+    print(nat.format("a","mysqrt(a)","math.sqrt(a)","diff"))
+    print(nat.format("-","————————","————————————","——————"))
+
+    for i in range(1,a+1):
+        my_sqrt=mysqrt(i)
+        sqrt=math.sqrt(i)
+        diff = abs(my_sqrt-sqrt)
+        print(nat.format(i,my_sqrt,sqrt,diff))
+        
+test_square_root(9)    
+
+#%%7.2
+
+def eval_loop():
+    b=0
+    while True:
+        a = input("请输入您想要计算的内容。\n")    
+        if a =="done":
+            break 
+        b = eval(a)
+        print(b)
+    print("done")
+    return b
+
+
+eval_loop()   
+
+#%%7.3
+import math
+def factorial(k):
+    num = 1
+    if k==0:
+        return 1
+    for i in range(1,k+1):
+        num*=i
+    return num
+
+print(factorial(4)) 
+
+
+# def estimate_pi():
+#     while True:
+#         a=0
+#         k=0
+#         b = factorial(4*k)*(1103+26390*k)/((factorial(k)**4)*396**(4*k))
+#         a+=b
+#         k+=1
+#         if a<=1e-15:
+#             break
+#         my_pi=1/(a*2*math.sqrt(2) /9801)
+#         print(my_pi)
+        
+# estimate_pi()
+
+def f(k):
+    b_0 = factorial(4*k)*(1103+26390*k)/((factorial(k)**4)*(396**(4*k)))
+    b =b_0*2*math.sqrt(2)/9801
+    return b
+
+def estimate_pi():
+    a=0
+    k=0   
+    while True:
+        a+=f(k)
+        k+=1
+        if f(k)<=1e-15:
+            return 1/a
+        
+print(estimate_pi())
+
+print(abs(estimate_pi()-math.pi))
+    
+        
+        
+        
+        
+        
+        
+        
+            
+                
+            
