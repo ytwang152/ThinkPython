@@ -1,0 +1,300 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Nov  5 11:47:00 2022
+
+@author: 王宇彤
+"""
+
+#%% 10.1
+def nested_sum(t):
+    t_sum =0
+    for i in t:
+        t_sum+=sum(i)
+    return t_sum
+
+a=[[1,2],[3,4],[5,6,7]]
+
+print(nested_sum(a))        
+    
+#%%10.2
+def cumsun(t):
+    sum=0
+    t_1=[]
+    for i in t:
+        sum+=t[i-1]
+        t_1.append(sum)
+    return t_1
+
+a=[1,2,3,4]
+print(cumsun(a))
+
+#%%10.3
+def middle(t):
+    t1=t[1:-1]
+    return t1
+        
+a=[1,2,3,4]
+print(middle(a))
+
+#%%10.4
+def chop(t):
+    del t[0]
+    del t[-1]
+
+a=[1,2,3,4]
+print(chop(a))
+print(a)
+
+
+#%%10.5
+def is_sorted(t):
+    i=0
+    while i<len(t)-1:
+        if t[i]>t[i+1]:
+            return False
+            break
+        i=i+1
+    return True
+        
+    
+
+
+a=[1,2,5,6,4]
+print(is_sorted(a))
+
+#%%10.6
+def is_anagram(word1,word2):   
+    a =list(word1)
+    b =list(word2)
+    a.sort()
+    b.sort()
+    i=0
+    if len(a)==len(b):
+        while i<len(a):
+            if a[i]!=b[i]:
+                return
+            i+=1
+        return True
+          
+print(is_anagram("oko" ,"iko"))    
+
+
+#%%10.7
+def has_duplicates(t):
+    t1=t[:]
+    t1.sort()
+    i=0
+    while i<len(t)-1:
+        if t1[i]==t1[i+1]:
+            return True
+        i+=1
+        
+a=[1,2,3,4,1,1]
+print(has_duplicates(a))
+print(a)
+
+#%%10.8
+import random
+
+def birthday_list():
+    b =[]
+    for i in range(23):
+        birthday=random.randint(1,366)
+        b.append(birthday)
+    return b
+def same_num(b):
+    t=b[:]
+    t.sort()
+    same_n=0
+    for i in range(len(t)-1):
+        if t[i] == t[i+1]:
+            return True
+    return False
+
+def pro_same_birthday(n):
+    a =0
+    for i in range(n):
+        if same_num(birthday_list()):
+            a+=1
+    pro =a/n
+    return pro
+
+print(pro_same_birthday(1000000))
+
+
+    
+
+    
+    
+    
+    
+
+#%%10.9
+import time
+def list_plus():
+    fin = open("D://files//words_list.txt")
+    start=time.time()
+    list_word=[]
+    for line in fin:
+        word =line.strip()
+        list_word+=word
+    end = time.time()
+    cost = end-start
+    return cost
+
+def list_append():
+    fin = open("D://files//words_list.txt")
+    start=time.time()
+    list_word=[]
+    for line in fin:
+        word =line.strip()
+        list_word.append(word)
+    end = time.time()
+    cost = end-start
+    return cost
+
+
+print(list_append())
+print(list_plus())
+        
+#t=t+=[x]的方法耗时更少，
+        
+    
+
+#%%10.10
+word1 =3
+t_1 =[1,2,3,4,5,6,7,8,9]
+def in_bisect(t,word):
+    t1=t[:]
+    begin_n =0
+    end_n =len(t1)-1
+    middle_n = int((len(t1)-1)/2)
+    while end_n-begin_n>5:
+        if word>=t1[begin_n] and word<=t1[middle_n]:
+            middle_n =int((middle_n-begin_n)/2)
+            end_n =middle_n
+        elif word>=t1[middle_n] and word<=t1[end_n]:
+            middle_n =int((end_n-middle_n)/2)
+            begin_n =middle_n
+        else:
+            return None
+    t1[begin_n:end_n]
+    if word in t1:
+        begin_word=t1[begin_n]
+        index =t.index(begin_word)+t1.index(word)
+        return index
+    return None
+
+print(in_bisect(t_1,5))
+
+#%%10.11   
+    
+def is_reverse(word1,word2):
+    if word1==word2[::-1]:
+        return True
+    return False
+
+def t():
+    fin =open("D://files//words_list.txt")
+    new_fin=[]
+    for line in fin:
+        word1=line.strip()
+        new_fin.append(word1)
+    return new_fin
+    
+
+def find_reverse():
+    new_fin=t() 
+    for i in range(len(new_fin)-1):
+        for j in range(i+1,len(new_fin)):
+            if is_reverse(new_fin[i],new_fin[j]):
+                print(new_fin[i],new_fin[j])
+
+find_reverse()
+     
+
+
+#%%10.12
+
+def pair(word):
+    word1=""
+    word2=""
+    for i in range(len(word)):
+        if i%2==0:
+            word1 +=word[i]
+        else:
+            word2 +=word[i]
+    return word1,word2
+
+def words_list():
+    word_list =[]
+    fin=open("D://files//words_list.txt")
+    for line in fin:
+        word=line.strip()
+        word_list.append(word)
+    return word_list
+            
+        
+    
+
+def find_pair():
+    n=0
+    t=words_list()
+    for word in t:
+        word1,word2=pair(word)
+        if word1 in t and word2 in t:
+            n+=1
+            print(word1,"+",word2,">",word)
+    return n
+
+print(find_pair())
+
+
+
+def three(word):
+    word1=""
+    word2=""
+    word3=""
+    for i in range(len(word)):
+        if i%3==1:
+            word1 +=word[i]
+        elif i%3==2:
+            word2 +=word[i]
+        else:
+            word3 +=word[i]
+    return word1,word2,word3
+        
+    
+
+def find_three():
+    n=0
+    t=words_list()
+    for word in t:
+        word1,word2,word3=three(word)
+        if word1 in t and word2 in t and word3 in t:
+            n+=1
+            print(word1,"+",word2,"+",word3,">",word)
+    return n
+
+print(find_three())
+
+
+            
+
+
+
+
+
+
+
+    
+    
+            
+        
+    
+
+    
+    
+   
+        
+    
