@@ -1,0 +1,180 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Nov  5 19:40:44 2022
+
+@author: 王宇彤
+
+"""
+
+#%%9.1
+fin=open("D:\\files\\words_list.txt")
+def over_20():
+    for i in fin:
+        word =i.strip()
+        if len(word)>20:
+            print(word)
+    
+print(over_20())
+
+#%%9.2
+fin=open("D:\\files\\words_list.txt")
+
+def has_no_e(words):
+    i=0
+    while i<len(words):
+        if words[i]=="e":
+            return None
+        i+=1
+    return True
+
+print(has_no_e("ok"))   
+
+
+def words_no_e():
+    n = 0
+    m = 0
+    for i in fin:
+        word =i.strip()
+        if has_no_e(word)==True:
+            print(word)
+            n+=1
+        m+=1
+    prob =n/m
+        
+    return prob
+
+
+print(words_no_e())
+
+#%%9.3
+fin=open("D:\\files\\words_list.txt")
+
+def avoids(word,forbidden_):
+    for i in word:
+        if i in forbidden_ :
+            return False
+    return True
+
+
+forbidden = input("请输入禁止使用的字符。\n")
+
+def num_avoid(forbidden):
+    x = 0
+    for line in fin:
+        word = line.strip()
+        if forbidden in word:
+            x +=1
+    print(x)
+    
+num_avoid(forbidden)   
+
+
+#%%禁止最少的5个字母
+from itertools import combinations
+
+def letter_list():
+    t =[chr(i) for i in range(97,123)]
+    return t
+
+def avoid_5(word,forbidden_5):
+    """若word中不包含5个字符返回true"""
+    i =0
+    while i<5:
+        if forbidden_5[i] in word:
+            return False
+        i+=1
+    return True
+    
+
+def num_forbidden5(forbidden_5):
+    """返回不包含5个字符的单词数量"""
+    x = 0
+    fin=open("D:\\files\\words_list.txt") 
+    for line in fin:
+        word = line.strip()
+        if avoid_5(word,forbidden_5):
+            x+=1
+    return x
+
+def max_num():
+    a=0
+    t=[]
+    letter_26=letter_list()
+    for p in combinations(letter_26,5):
+        b =num_forbidden5(p)
+        if b>a :
+            a=b
+            t=p
+    return  a,t
+
+print(max_num())
+        
+
+
+#%%9.4
+fin=open("D:\\files\\words_list.txt")
+def uses_only(word,string):
+    for i in word:
+        if i not in string:
+            return False
+    return True
+
+print(uses_only("abce","abcd"))   
+
+def sentence():
+    for line in fin:
+        word = line.strip()+""
+        if uses_only(word,"acefhlo") and word !="Hoe" and word !="alfafa":
+           print(word)
+  
+
+print(sentence())            
+
+#%%9.5
+fin=open("D:\\files\\words_list.txt")
+def uses_all(word,string):
+    for letter in string:
+        if letter not in word:
+            return False
+    return True
+
+print(uses_all("aeeioss","aee"))
+
+def num_uses_all(string):
+    n = 0
+    for line in fin:
+        word =line.strip()
+        if uses_all(word,string):
+            n+=1
+    return n
+
+print(num_uses_all("aeiouy"))
+
+#%%9.6
+fin=open("D:\\files\\words_list.txt")
+def is_abcdedarian(word):
+    i = 0
+    while i<len(word)-1:
+        if word[i]>word[i+1]:
+            return False
+        i+=1
+    return True
+print(is_abcdedarian("abcdda"))
+
+def num_is_abcdedarian():
+    i = 0
+    for line in fin:
+        word =line.strip()
+        if is_abcdedarian(word):
+            i+=1
+    return i
+
+print(num_is_abcdedarian())    
+
+        
+            
+        
+    
+                
+            
+  
