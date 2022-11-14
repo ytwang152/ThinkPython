@@ -1,0 +1,122 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Nov  4 20:10:22 2022
+
+@author: 王宇彤
+"""
+#%%Exercise 8.1
+txt ="   python  "
+x = txt.strip() 
+print("this is",x,"world")
+
+a="aaaa"
+a_1=a.strip("a")
+print(a_1)
+
+b=";b"
+b_1=b.strip(";")
+print(b_1)
+
+c ="我吃了早饭，我吃了晚饭，我吃了午饭"
+c_1 = c.replace("我", "他",2)
+print(c_1)
+
+
+#%%Exercise 8.2
+word = "banana"
+index = word.count("a")
+print(index)
+
+#%%Exercise 8.3
+def is_palindrome(word):
+    if word[::1]==word[::-1]:
+        return True
+    return False
+    
+print(is_palindrome("sss"))
+
+#%%Exercise 8.4
+def any_lowercase1(s):
+    """
+    检查首字母是否小写
+    """
+    for c in s:
+        if c.islower():
+            return True
+        else:
+            return False
+    
+print(any_lowercase1("Sy"))
+
+def any_lowercase2(s):
+    """
+    检查"c"这个字母是否小写
+    """
+    for c in s:
+        if "c".islower():
+            return "True"
+        else:
+            return "False"
+    
+print(any_lowercase2("SY"))
+
+def any_lowercase3(s):
+    """
+    检查最后一个字母是否小写
+    """
+    for c in s:
+        flag =c.islower()
+    return flag
+          
+print(any_lowercase3("sY"))
+
+
+def any_lowercase4(s):
+    """
+    检查字符串是否存在小写字母
+    """
+    flag=False
+    for c in s:
+        flag =flag or c.islower()     
+    return flag
+          
+print(any_lowercase4("yY"))
+
+def any_lowercase5(s):
+    """
+    检查字符串是否存在小写字母
+    """
+    for c in s:
+        if not c.islower():
+            return False
+    return True
+
+print(any_lowercase4("AaA"))
+
+
+#%%8.5
+
+
+
+def rotate_letter(letter,n):
+        if letter.isupper():
+           begin=ord('A')
+        elif letter.islower():
+           begin=ord("a")
+        else:
+            return letter
+        diff = ord(letter)-begin
+        code = (diff+n)%26+begin
+        return chr(code)
+    
+def rotate_txt(txt,n):
+    rotate_txt=""
+    for letter in txt:
+        new_letter=rotate_letter(letter,n)
+        rotate_txt+=new_letter
+    return rotate_txt
+
+print(rotate_txt("Hello,world",-10))
+        
+        
+               
