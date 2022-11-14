@@ -1,0 +1,99 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Nov  5 22:59:25 2022
+
+@author: 王宇彤
+"""
+#%%9.7
+def is_consecutive(word):
+    i =0
+    while i <=len(word)-6:
+        if word[i]==word[i+1] and word[i+2]==word[i+3] and word[i+4]==word[i+5]:
+            return True
+        i+=1
+    return False
+
+print(is_consecutive("jaabbcc"))
+
+def find():
+    t=[]
+    fin=open("D:\\files\\words_list.txt")
+    for line in fin:
+        word=line.strip()
+        if is_consecutive(word):
+            t.append(word)
+    return t
+
+print(find())
+
+    
+
+
+
+
+#%%9.8
+def is_palindrome(word1):
+    word2=word1[::-1]
+    if word1==word2:
+        
+        return True
+    
+def find_palindrome():
+    for i in range(100000,1000000):
+        word=str(i)
+        word0=word[2:]
+        if is_palindrome(word0):
+            word=str(i+1)
+            word1=word[1:]
+            if is_palindrome(word1):
+                word=str(i+2)
+                word2=word[1:-1]
+                if is_palindrome(word2):
+                    word=str(i+3)
+                    word3=word[::-1]
+                    if is_palindrome(word3):
+                        print(i)
+                        
+                    
+print(is_palindrome("11111"))                   
+print(find_palindrome())   
+
+
+#%%9.9
+def is_palindrome(age1,age2):
+    age_1 =str(age1)
+    age_2 =str(age2)
+    if age_1==age_2[::-1]:
+        return True
+        
+        
+        return True
+def my_age():
+    for age in range(1,100):
+        for diff in range(10,50):
+            age_m =age+diff
+            for i in range(1,age):
+                my_yonger = age-i
+                mother_youger =age_m-i
+                a = 0 
+                if is_palindrome(my_yonger,mother_youger):
+                    a+=1
+            return a
+            for i in range(age,100):
+                my_yonger = age+i
+                mother_youger =age_m+i
+                b = 0 
+                if is_palindrome(my_yonger,mother_youger):
+                    global b
+                    b+=1
+            return b
+        if a ==6 and b==2:
+            print(i)
+
+
+
+        
+        
+            
+                
+    
