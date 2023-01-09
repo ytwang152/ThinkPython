@@ -1,0 +1,138 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Nov 19 19:25:20 2022
+
+@author: DELL
+"""
+#%%13.1
+import string 
+fin =open("D:\\files\\tale.txt","r",encoding="UTF-8")
+
+def remove(file):
+    t1=string.punctuation
+    t2=string.whitespace
+    for line in file:
+        transtab=str.maketrans(t1," "*32) #the first two maketrans arguments must have equal length
+        line1=line.translate(transtab).strip(t2).lower()
+        line2=line1.replace(" ","")
+        print(line2)
+        
+
+
+remove(fin)
+
+
+#%%13.2-5
+import string 
+import random
+import os
+fin =open("D:\\files\\tale.txt","r",encoding="UTF-8")
+print(os.listdir("D:\\files"))
+
+def word_list():
+    """单词表"""
+    d = {}
+    fin = open("D:\\files\\words_list.txt")
+    for line in fin:
+        word = line.strip().lower()
+        d[word] = word
+    return d
+    
+def process_line(line,hist):
+    """对文件的每一行进行处理，并对单词进行计数"""
+    t1=string.punctuation+string.whitespace
+    line=line.replace("-"," ")
+    for word in line.split(" "):
+        word.strip(t1)
+        hist[word]=hist.get(word,0)+1
+
+
+def process_file(filename):
+    """跳过开头和结尾，统计书中出现的单词及对应出现次数"""
+    hist={}
+    for line in filename:
+        if True:
+            if line.startswith("***START OF ")==True:
+                break
+        if line.startswith("*** END OF")==True:
+            break
+        process_line(line,hist)
+    return hist
+
+
+def all_words(file):
+    """计算词数"""
+    hist=process_file(file)
+    num=0
+    for v in hist.values():
+        num+=1
+    return num
+
+def different_words(hist):
+    """计算词汇量"""
+    return len(hist)
+    
+
+def most_frequency(hist,n):
+    """
+    打印书中最常用的n个单词
+    """
+    t=[]
+    for key,value in hist.items():
+        t.append((value,key))
+        
+    t.sort(reverse=True)
+    print(t[:20])
+    
+def not_in_list(book_hist,word_list):
+    """打印书中没有出现在单词表中的单词"""
+    res=[]
+    for word in book_hist.keys():
+        if word not in word_list():
+            res[word]=book_hist[word]
+    return res
+
+
+
+def choose_from_hist(hist):
+    """随机选择单词"""
+    t=[]
+    for word,freq in hist.items():
+        t.extend([word]*freq)
+    return random.choice(t)
+
+
+#13.6
+def diff(d1,d2):
+    """
+    使用集合的差集操作来找出一本书中不在 work list 中的单词。
+    """
+    d={}
+    for key in d2:
+        if key not in d1:
+            d[key]=key
+    return d
+
+
+
+#13.7
+import bisect
+import random
+def random_word(hist):
+    """
+    按照单词在书中出现的频率，随机选取一个单词
+    """
+    freq_t=[]
+    word_t=[]
+    total_freq=0
+    '''创建单词列表及对应的累加频率列表'''
+    for word,freq in hist.items():
+        word_t.append(word)
+        total_freq+=freq
+        freq_t.append(total_freq)
+        
+    """随机选取一个数，并返回total_freq中对应插值的索引"""
+    x=random.randint(0,total_freq-1)
+    index=bisect.bisect(freq_t, x)
+    """返回对应单词"""
+    return word_t[index]
