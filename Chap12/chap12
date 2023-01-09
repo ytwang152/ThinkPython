@@ -1,0 +1,190 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Nov 18 22:06:20 2022
+
+@author: DELL
+
+
+"""
+
+#%%12.1
+def histogram(s):
+    d=dict()
+    for c in s:
+        d[c]=d.get(c,0)+1
+    return d
+def most_frequent(s):
+    """按照字符出现频率降序打印字母"""
+    d=histogram(s)
+    t=list(zip(d.values(),d.keys()))
+    t1=sorted(t,reverse=True)
+    t
+    return t1
+
+print(most_frequent("sxnushdxinsa"))  
+
+#%%12.2
+fin =open("D:\\files\\words_list.txt")
+
+
+def signature(s):
+    """返回顺序排列字符串"""
+    t=list(s)
+    t.sort()
+    t="".join(t)
+    return t
+
+# print(signature("apple"))
+
+def all_anagrams(file):
+    d={}
+    for line in file:
+        word=line.strip().lower()
+        t=signature(word)
+        if t not in d:
+            d[t]=[word]
+        else:
+            d[t].append(word)
+    
+    return d
+
+#print(all_anagrams(fin))   
+
+def frequent_anagrams():
+    t=[]
+    ana=all_anagrams(fin)
+    for v in ana.values():
+        if len(v)>1:       
+            t.append((len(v),v))
+    t.sort()
+    return t
+# print(frequent_anagrams())
+
+def bingo_anagrams(n):
+    """
+    n为字母个数
+    """
+    t=[]
+    d=all_anagrams(fin)
+    for k,v in d.items():
+        v=d[k]
+        if len(k)==n:
+            t.append(v)
+    t.sort()
+    print(t)
+
+
+#bingo_anagrams(8)
+
+#12.3
+"""
+1.列出异构词
+2.两两对比，不同+1，
+"""
+
+def word_distance(word1,word2):
+    i=0
+    for c1,c2 in zip(word1,word2):
+        if c1!=c2:
+            i+=1
+    return i
+
+
+    
+def metatheisi_pair():
+    d=all_anagrams(fin)
+    for anagram in d.values():
+        for i in range(0,len(anagram)):
+            word1=anagram[i]
+            for j in range(i+1,len(anagram)):
+                word2=anagram[j]
+                if word_distance(word1, word2)==2:
+                    print(word1,word2)
+                    
+metatheisi_pair()
+
+
+#%%12.4
+"""
+最终实现：输入单词表，输出所有缩减词
+1.一个单词的所有子词
+2.子词是否可缩减
+3.备忘：已知的可以被缩减的词汇（键值对，最后只剩两项就可以）
+"""
+
+def word_list():
+    t=[]
+    fin=open("D:\\files\\words_list.txt")          
+    for line in fin:
+         word=line.strip().lower()
+         t.append(word)
+    return t
+
+def son_word(word):
+    """
+    将单词的所有子词以列表形式输出"""
+    
+    t=[]
+    for i in range(0,len(word)-1):
+        son=word[:i]+word[i+1:]
+        t.append("".join(son))
+    return t
+
+#print(son_word("word"))
+
+
+known=[]
+w_t=word_list()
+for w in w_t:
+    if len(w) ==2:
+        known.append(w)
+def check_word(i):
+    """检查某长度单词是否为可缩减词汇，并存储
+    i 单词长度"""
+    for w in w_t:
+        if len(w)==i:
+            son_t=son_word(w)
+            for son in son_t:
+                if son in known:
+                    known.append(w)
+                    
+def check_word2():
+    """
+    输出所有的可缩减词汇"""
+    for i in range(3,50):
+        check_word(i)
+    print(known)
+    print(max(known,key=len,default=""))
+    
+
+check_word2()
+
+
+                    
+
+
+
+        
+
+            
+        
+        
+        
+
+    
+                    
+    
+    
+    
+
+
+
+     
+
+
+
+
+
+
+    
+    
