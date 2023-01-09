@@ -1,0 +1,150 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Nov 17 20:36:34 2022
+
+@author: 王宇彤
+
+"""
+
+#%%11.1
+import time
+fin =open("D:\\files\\words_list.txt")
+d=dict()
+def word_dict():
+    i=0
+    for s in fin:
+        word=s.strip()
+        d[word]=i
+        i+=1
+    return d
+
+word_dict()
+
+def search_1(d,word):
+    start=time.time()    
+    print(word in d)
+    end =time.time()
+    return end
+
+#%%11.2
+a ={"p":1,"o":2,"c":1}
+def invert_dict(d):
+    invert =dict()
+    for key in d:
+        invert.setdefault(d[key], []).append(key)
+    return invert
+
+print(invert_dict(a))
+
+#%%11.3
+known= {}
+def ack(m,n):
+    if (m,n) in known:
+       return  known[m,n]
+    elif m==0:
+       known[m,n]=n+1
+       return known[m,n]
+    elif m>0 and n == 0:
+       known[m,n]=ack(m-1,1)
+       return known[m,n]
+    else:
+        known[m,n]=ack(m-1,ack(m,n-1))
+        return known[m,n]
+ack(3,4)
+print(known) 
+
+#%%11.4
+def has_duplicates_1(t):
+    d = {}
+    i=0
+    while i<len(t):
+        d.setdefault(t[i],[]).append(i)
+        i+=1
+    for k in d:
+        if len(d[k])>1:
+            return True
+
+def has_duplicates_2(t):
+    d ={}
+    for k in t:
+        if k in d:
+            return True
+        d[k]=None
+    return False
+
+                
+       
+a =[1,2,3,4,1]
+print(has_duplicates_1(a))
+print(has_duplicates_2(a))
+
+
+#%%11.5
+
+def rotated_word(t):
+    d={}
+    pair=[]
+    n=0
+    for k in t:
+        d[k]=None
+        if k[::-1] in d:
+            pair.append([k,k[::-1]])
+            n+=1   
+    return pair,n
+        
+fin =open("D:\\files\\words_list.txt")
+t=[]
+for line in fin:
+     word=line.strip()
+     t.append(word)
+     
+print(rotated_word(t))
+
+#%%11.6
+
+from __future__ import print_function, division
+
+
+def read_dictionary(filename='D:\\files\\c06d.txt'):
+    
+    d = dict()
+    fin = open(filename)
+    for line in fin:
+
+        # skip over the comments
+        if line[0] == '#': continue
+
+        t = line.split()
+        word = t[0].lower()
+        pron = ' '.join(t[1:])
+        d[word] = pron
+
+    return d
+
+d = read_dictionary(filename='D:\\files\\c06d.txt')
+    
+
+def check_word():
+    for w in d:
+        w1=w[1:]
+        w2=w[0]+w[2:]
+        if w1 in d and w2 in d and w1!=w2:
+            if d[w]== d[w1] and d[w1] == d[w2]:
+                print(w,w1,w2)
+                
+check_word()
+                
+    
+
+
+
+
+        
+
+
+    
+    
+
+   
+    
+        
