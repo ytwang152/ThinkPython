@@ -1,0 +1,55 @@
+fin =open("D:\\files\\words_list.txt")
+
+
+def signature(s):
+    """返回顺序排列字符串"""
+    t=list(s)
+    t.sort()
+    t="".join(t)
+    return t
+
+# print(signature("apple"))
+
+def all_anagrams(file):
+    """创建一个字典，单词为值，对应的按顺序排列的字符串为键
+        返回值：字典"""
+    d={}
+    for line in file:
+        word=line.strip().lower()
+        t=signature(word)
+        if t not in d:
+            d[t]=[word]
+        else:
+            d[t].append(word)
+    
+    return d
+
+#print(all_anagrams(fin))   
+
+def frequent_anagrams():
+    """返回所有的可异位词，并按照异位构词的数量进行排列
+    retrun:列表，列表元素为异位词集合"""
+    t=[]
+    ana=all_anagrams(fin)
+    for v in ana.values():
+        if len(v)>1:       
+            t.append((len(v),v))
+    t.sort()
+    return t
+# print(frequent_anagrams())
+
+def bingo_anagrams(n):
+    """
+    n为字母个数
+    单词个数为n的字符串能够够成的异位词
+    """
+    t=[]
+    d=all_anagrams(fin)
+    for k,v in d.items():
+        v=d[k]
+        if len(k)==n:
+            t.append(v)
+    t.sort()
+    print(t)
+
+#bingo_anagrams(8)
