@@ -1,0 +1,40 @@
+#%%14.1
+import os
+def sed(oldstr,newstr,oldfile,newfile):
+    """用新str替换特定str,并存储到新文件中"""
+    fin1=open(oldfile,"r")
+    fin2=open(newfile,"c")
+    for line in fin1:
+        new_str=line.replace(oldstr,newstr)
+        fin2.write(new_str)
+    fin1.close()
+    fin2.close()
+    
+#old="D:\\PythonStudy\\ThinkPython\\Exercise\\Chap14\\old.docx"
+old="D:\\files\old_file.txt"
+
+print(os.path.exists("D:\\files\old_file.txt"))
+
+
+
+#%%14.2
+from anagram_set import frequent_anagrams,signature
+import shelve
+
+def store_anagrams(filename):
+    """将字典保存到shelf中"""
+    ana=frequent_anagrams()
+    shelf=shelve.open(filename,"c")
+    #'w' ：读写已存在文件;'c' ：;(默认)读写文件，不存在则创建;'n' ：新建并读写 
+    for string,word_set in ana.items():
+        shelf[string]=word_set
+    shelf.close()
+    
+def read_anagrams(word,filename):
+    """在filenanme中查找word，并返回对应的anagrams列表"""
+    shelf=shelve.open(filename)
+    string=signature(word)
+    try:
+        return shelf[string]
+    except:
+        return print("该单词不存在")
