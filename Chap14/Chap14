@@ -38,3 +38,39 @@ def read_anagrams(word,filename):
         return shelf[string]
     except:
         return print("该单词不存在")
+        
+        
+
+#%%14.3
+import os
+def all_path(dirname):
+    """
+    返回一个目录（及其子目录）下所有文件的路径
+    """
+    names=[]
+    for name in os.listdir(dirname):
+        path=os.path.join(dirname,name)
+        if os.path.isfile(path):
+            names.append(path)
+        else:
+            all_path(path)
+    return names
+
+def find_format(t,form):
+    """
+    找到列表中特定后缀的文件
+    t:列表
+    form:后缀名
+    """
+    form_t=[]
+    for name in t:
+        if os.path.splitext(name)[1]==form:
+            form_t.append(name)
+    return form_t
+            
+            
+path="D:\\files\\"
+#print(all_path(path))
+t=all_path(path)
+form=".txt"
+print(find_format(t,form))
